@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginFetchAC } from '../../../redux/actionCreators/authAC';
 import style from './Login.module.css';
 
 function Login() {
+  const dispatch = useDispatch();
+
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const { email, password } = inputs;
   const inputsHandler = ({ target: { name, value } }) => {
     setInputs((prevState) => ({ ...prevState, [name]: value }));
   };
+  const submitHandler = (event) => {
+    event.preventDefault();
+    dispatch(loginFetchAC({ email, password }));
+  };
   return (
-        <form>
+        <form onSubmit={submitHandler}>
         <input
           type="email"
           name="email"
@@ -18,7 +26,7 @@ function Login() {
           onChange={inputsHandler}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           className={`${style.formTextInp}`}
           placeholder="password"

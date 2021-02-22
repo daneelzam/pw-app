@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signUpFetchAC } from '../../../redux/actionCreators/authAC';
 import style from './SignUp.module.css';
 
 function SignUp() {
-  const [inputs, setInputs] = useState({ email: '', password: '', userName: '' });
-  const { email, password, userName } = inputs;
+  const dispatch = useDispatch();
+
+  const [inputs, setInputs] = useState({ email: '', password: '', username: '' });
+  const { email, password, username } = inputs;
   const inputsHandler = ({ target: { name, value } }) => {
     setInputs((prevState) => ({ ...prevState, [name]: value }));
   };
+  const submitHandler = (event) => {
+    event.preventDefault();
+    dispatch(signUpFetchAC({ username, password, email }));
+  };
   return (
-        <form>
+        <form onSubmit={submitHandler}>
         <input
           type="text"
-          name="userName"
+          name="username"
           className={`${style.formTextInp}`}
           placeholder="name"
-          value={userName}
+          value={username}
           onChange={inputsHandler}
         />
         <input
@@ -26,7 +34,7 @@ function SignUp() {
           onChange={inputsHandler}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           className={`${style.formTextInp}`}
           placeholder="password"

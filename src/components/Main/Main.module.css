@@ -8,44 +8,38 @@
     padding: 20px;
 }
 
-.formContent {
+.content {
     border-radius: 10px 10px 10px 10px;
     background: #fff;
     padding: 30px;
     width: 90%;
-    max-width: 450px;
+    max-width: 800px;
     position: relative;
     padding: 0px;
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
 }
 
-.inactive {
-    color: #cccccc;
-}
-
-.active {
-    color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
-}
-
-.underlineHover:after {
-    display: block;
-    left: 0;
-    bottom: -10px;
-    width: 0;
-    height: 2px;
+.btn {
     background-color: #56baed;
-    content: "";
-    transition: width 0.2s;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 40px 20px;
+    transition: all 0.3s ease-in-out;
 }
 
-.underlineHover:hover {
-    color: #0d0d0d;
+.btn:hover {
+    background-color: #39ace7;
 }
 
-.underlineHover:hover:after{
-    width: 100%;
+.btn:active{
+    transform: scale(0.95);
 }
 
 .error{
