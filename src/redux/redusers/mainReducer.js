@@ -1,4 +1,5 @@
 import {
+  MAIN_CREATE_TRANSACTION,
   MAIN_ERROR,
   MAIN_LOGOUT,
   MAIN_USER_HISTORY,
@@ -30,7 +31,7 @@ if (windowState && windowState.main) {
   };
 }
 
-const authReducer = (state = preloadedState, action) => {
+const mainReducer = (state = preloadedState, action) => {
   switch (action.type) {
     case MAIN_USER_INIT:
       return {
@@ -49,6 +50,11 @@ const authReducer = (state = preloadedState, action) => {
       return {
         ...state,
         userList: action.payload
+      };
+    case MAIN_CREATE_TRANSACTION:
+      return {
+        ...state,
+        balance: action.payload
       };
     case MAIN_ERROR:
       return {
@@ -72,4 +78,4 @@ const authReducer = (state = preloadedState, action) => {
   }
 };
 
-export default authReducer;
+export default mainReducer;

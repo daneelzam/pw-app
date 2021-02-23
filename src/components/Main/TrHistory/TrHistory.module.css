@@ -1,0 +1,9 @@
+.tableTrn{
+    width: 100%;
+}
+
+.tableHeader{
+    background-color: #39ace7;
+    color: white;
+    font-weight: bold;
+}

@@ -1,48 +1,47 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mainUserListFetchAC } from '../../../redux/actionCreators/mainAC';
+import { mainCreateTrnFetchAC, mainUserListFetchAC } from '../../../redux/actionCreators/mainAC';
 import style from './Transaction.module.css';
 
 function Transaction({ token }) {
   const dispatch = useDispatch();
-  const { userList } = useSelector((state) => state.main);
-  const [inputs, setInputs] = useState({ username: '' });
-  const { username } = inputs;
-  const searchRef = useRef();
-  const searchHandler = () => {
-    searchRef.current.style.display = 'block';
-    console.log(searchRef.current.style.display);
-  };
-  const inputsHandler = ({ target: { name, value } }) => {
-    if (name) {
-      return setInputs((prevState) => ({ ...prevState, [name]: value }));
-    }
-    return setInputs((prevState) => ({ ...prevState, username: value }));
-  };
+  const { userList, balance } = useSelector((state) => state.main);
+  const [inputs, setInputs] = useState({ username: '', sum: '' });
+  const { username, sum } = inputs;
+
   useEffect(() => {
     dispatch(mainUserListFetchAC(token, username));
   }, [token, username]);
-  return (
-    <form>
-    <input
-      type="text"
-      name="username"
-      className={`${style.formTextInp}`}
-      placeholder="name"
-      value={username}
-      onChange={inputsHandler}
-      onFocus={searchHandler}
-    />
-    <select ref={searchRef} multiple className={`${style.formTextSearch}`} onClick={inputsHandler}>
-    { userList && userList.length > 0
-      && userList.map((user) => (<option>{user.name}</option>))
+
+  const inputsHandler = ({
+    target: {
+      name, value
     }
-    </select>
-    <input
-      type="submit"
-      className={`${style.btn}`}
-      value="Send PW"
-    />
+  }) => setInputs((prevState) => ({ ...prevState, [name]: value }));
+
+  const trnHandler = (event) => {
+    event.preventDefault();
+    dispatch(mainCreateTrnFetchAC(token, username, sum));
+    setInputs({ username: '', sum: '' });
+  };
+
+  return (
+    <form onSubmit={trnHandler}>
+
+    <input type="search" list='filter' name="username" placeholder="name"
+      className={`${style.formTextInp}`} value={username} onChange={inputsHandler} />
+
+    <datalist id='filter'>
+    { userList && userList.length > 0
+      && userList.map((user) => (<option key={user.id}>{user.name}</option>))
+    }
+    </datalist>
+
+    <input type="number" min='1' max={balance} name="sum" placeholder="sum"
+      className={`${style.formTextInp}`} value={sum} onChange={inputsHandler} />
+
+    <input type="submit" className={`${style.btn}`} value="Send PW" />
+
     </form>
   );
 }
