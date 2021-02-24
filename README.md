@@ -6,7 +6,7 @@ The application is for Parrot Wings (PW, “internal money”) transfer between 
 
 Clone and fork the repository
 
-####Сreate a '.env' file and fill it with data 'REACT_APP_BASE_URL = http: //193.124.114.46: 3001'
+#### Сreate a '.env' file and fill it with data 'REACT_APP_BASE_URL = http: //193.124.114.46: 3001'
 
 In the project directory, you can run:
 
