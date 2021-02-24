@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { mainCreateTrnFetchAC, mainUserListFetchAC } from '../../../redux/actionCreators/mainAC';
 import style from './Transaction.module.css';
 
 function Transaction({ token }) {
+  const location = useLocation();
+
   const dispatch = useDispatch();
   const { userList, balance } = useSelector((state) => state.main);
   const [inputs, setInputs] = useState({ username: '', sum: '' });
@@ -12,6 +15,12 @@ function Transaction({ token }) {
   useEffect(() => {
     dispatch(mainUserListFetchAC(token, username));
   }, [token, username]);
+
+  useEffect(() => {
+    if (location.state && location.state.defName && -location.state.defSum) {
+      setInputs({ username: location.state.defName, sum: -location.state.defSum });
+    }
+  }, []);
 
   const inputsHandler = ({
     target: {

@@ -1,6 +1,7 @@
 import {
   MAIN_CREATE_TRANSACTION,
-  MAIN_ERROR, MAIN_LOGOUT, MAIN_USER_HISTORY, MAIN_USER_INIT, MAIN_USER_LIST
+  MAIN_ERROR, MAIN_LOGOUT,
+  MAIN_SORT_HISTORY_DOWN, MAIN_SORT_HISTORY_UP, MAIN_USER_HISTORY, MAIN_USER_INIT, MAIN_USER_LIST
 } from '../types';
 
 export const userInitAC = (id, name, email, balance) => ({
@@ -14,6 +15,8 @@ export const mainUserListAC = (userList) => ({ type: MAIN_USER_LIST, payload: us
 export const mainCreateTrnAC = (balance) => ({ type: MAIN_CREATE_TRANSACTION, payload: balance });
 export const mainErrorAC = (error) => ({ type: MAIN_ERROR, payload: error });
 export const mainLogoutAC = () => ({ type: MAIN_LOGOUT });
+export const mainSortDownAC = (sort) => ({ type: MAIN_SORT_HISTORY_DOWN, payload: sort });
+export const mainSortUpAC = (sort) => ({ type: MAIN_SORT_HISTORY_UP, payload: sort });
 
 // redux-thunk
 export const userInitFetchAC = (token) => (dispatch) => {

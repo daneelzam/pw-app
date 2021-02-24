@@ -2,6 +2,8 @@ import {
   MAIN_CREATE_TRANSACTION,
   MAIN_ERROR,
   MAIN_LOGOUT,
+  MAIN_SORT_HISTORY_DOWN,
+  MAIN_SORT_HISTORY_UP,
   MAIN_USER_HISTORY,
   MAIN_USER_INIT,
   MAIN_USER_LIST
@@ -55,6 +57,16 @@ const mainReducer = (state = preloadedState, action) => {
       return {
         ...state,
         balance: action.payload
+      };
+    case MAIN_SORT_HISTORY_DOWN:
+      return {
+        ...state,
+        trHistory: state.trHistory.sort((a, b) => a[action.payload] - b[action.payload])
+      };
+    case MAIN_SORT_HISTORY_UP:
+      return {
+        ...state,
+        trHistory: state.trHistory.sort((a, b) => b[action.payload] - a[action.payload])
       };
     case MAIN_ERROR:
       return {
